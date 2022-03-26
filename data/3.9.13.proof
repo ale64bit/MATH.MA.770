@@ -1,0 +1,5 @@
+macro "data/detachment.proof" A/A(a), B/B(a)
+rexists 1 a x
+lforall 2 a x
+rimpl 3
+lexists 4 a x

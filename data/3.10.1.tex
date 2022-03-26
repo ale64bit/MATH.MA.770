@@ -1,0 +1,21 @@
+\begin{prooftree}
+\AxiomC{$A \rightarrow A$}
+\AxiomC{$B \rightarrow B$}
+\doubleLine
+\RightLabel{[detachment]}
+\BinaryInfC{$A, (A \supset B) \rightarrow B$}
+\RightLabel{[XL]}
+\UnaryInfC{$(A \supset B), A \rightarrow B$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg B, (A \supset B), A \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$(A \supset B), \neg B, A \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg B, A \rightarrow \neg (A \supset B)$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg \neg (A \supset B), \neg B, A \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$\neg B, \neg \neg (A \supset B), A \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg \neg (A \supset B), A \rightarrow \neg \neg B$}
+\end{prooftree}

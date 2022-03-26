@@ -1,0 +1,38 @@
+\begin{prooftree}
+\AxiomC{$F(a) \rightarrow F(a)$}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(F(a) \land G(a)) \rightarrow F(a)$}
+\RightLabel{[$\forall$L]}
+\UnaryInfC{$\forall x (F(x) \land G(x)) \rightarrow F(a)$}
+\RightLabel{[$\forall$R]}
+\UnaryInfC{$\forall x (F(x) \land G(x)) \rightarrow \forall x F(x)$}
+\AxiomC{$G(a) \rightarrow G(a)$}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(F(a) \land G(a)) \rightarrow G(a)$}
+\RightLabel{[$\forall$L]}
+\UnaryInfC{$\forall x (F(x) \land G(x)) \rightarrow G(a)$}
+\RightLabel{[$\forall$R]}
+\UnaryInfC{$\forall x (F(x) \land G(x)) \rightarrow \forall x G(x)$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$\forall x (F(x) \land G(x)) \rightarrow (\forall x F(x) \land \forall x G(x))$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (\forall x (F(x) \land G(x)) \supset (\forall x F(x) \land \forall x G(x)))$}
+\AxiomC{$F(a) \rightarrow F(a)$}
+\RightLabel{[$\forall$L]}
+\UnaryInfC{$\forall x F(x) \rightarrow F(a)$}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(\forall x F(x) \land \forall x G(x)) \rightarrow F(a)$}
+\AxiomC{$G(a) \rightarrow G(a)$}
+\RightLabel{[$\forall$L]}
+\UnaryInfC{$\forall x G(x) \rightarrow G(a)$}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(\forall x F(x) \land \forall x G(x)) \rightarrow G(a)$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$(\forall x F(x) \land \forall x G(x)) \rightarrow (F(a) \land G(a))$}
+\RightLabel{[$\forall$R]}
+\UnaryInfC{$(\forall x F(x) \land \forall x G(x)) \rightarrow \forall x (F(x) \land G(x))$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow ((\forall x F(x) \land \forall x G(x)) \supset \forall x (F(x) \land G(x)))$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$ \rightarrow (\forall x (F(x) \land G(x)) \equiv (\forall x F(x) \land \forall x G(x)))$}
+\end{prooftree}

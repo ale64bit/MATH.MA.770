@@ -1,0 +1,18 @@
+axiom F(a)
+rlconj 1 G(a)
+lforall 2 a x
+rforall 3 a x
+axiom G(a)
+llconj 5 F(a)
+lforall 6 a x
+rforall 7 a x
+rconj 4 8
+lforall 1 a x
+rlconj 10 :Ax G(x)
+lforall 5 a x
+llconj 12 :Ax F(x)
+rconj 11 13
+rforall 14 a x
+rimpl 9
+rimpl 15
+rconj 16 17

@@ -1,0 +1,7 @@
+axiom A
+rlconj 1 ~A
+lneg 2
+rlconj 3 A
+llconj 3 A
+lcont 5
+rneg 6

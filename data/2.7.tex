@@ -1,0 +1,24 @@
+\begin{prooftree}
+\AxiomC{$A(a) \rightarrow A(a)$}
+\RightLabel{[WR]}
+\UnaryInfC{$A(a) \rightarrow A(a), B$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow A(a), (A(a) \supset B)$}
+\RightLabel{[$\exists$R]}
+\UnaryInfC{$ \rightarrow A(a), \exists x (A(x) \supset B)$}
+\RightLabel{[XR]}
+\UnaryInfC{$ \rightarrow \exists x (A(x) \supset B), A(a)$}
+\RightLabel{[$\forall$R]}
+\UnaryInfC{$ \rightarrow \exists x (A(x) \supset B), \forall x A(x)$}
+\AxiomC{$B \rightarrow B$}
+\RightLabel{[WL]}
+\UnaryInfC{$A(a), B \rightarrow B$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$B \rightarrow (A(a) \supset B)$}
+\RightLabel{[$\exists$R]}
+\UnaryInfC{$B \rightarrow \exists x (A(x) \supset B)$}
+\RightLabel{[$\supset$L]}
+\BinaryInfC{$(\forall x A(x) \supset B) \rightarrow \exists x (A(x) \supset B), \exists x (A(x) \supset B)$}
+\RightLabel{[CR]}
+\UnaryInfC{$(\forall x A(x) \supset B) \rightarrow \exists x (A(x) \supset B)$}
+\end{prooftree}

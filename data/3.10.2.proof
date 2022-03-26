@@ -1,0 +1,6 @@
+macro "data/3.10.1.proof" 
+axiom B
+limpl 1 2
+lexch 3 1
+lexch 4 0
+rimpl 5

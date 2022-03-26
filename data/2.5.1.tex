@@ -1,0 +1,38 @@
+\begin{prooftree}
+\AxiomC{$A \rightarrow A$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg A, A \rightarrow $}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(\neg A \land \neg B), A \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$A \rightarrow \neg (\neg A \land \neg B)$}
+\AxiomC{$B \rightarrow B$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg B, B \rightarrow $}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(\neg A \land \neg B), B \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$B \rightarrow \neg (\neg A \land \neg B)$}
+\RightLabel{[$\lor$L]}
+\BinaryInfC{$(A \lor B) \rightarrow \neg (\neg A \land \neg B)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow ((A \lor B) \supset \neg (\neg A \land \neg B))$}
+\AxiomC{$A \rightarrow A$}
+\RightLabel{[$\lor$R]}
+\UnaryInfC{$A \rightarrow (A \lor B)$}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$ \rightarrow (A \lor B), \neg A$}
+\AxiomC{$B \rightarrow B$}
+\RightLabel{[$\lor$R]}
+\UnaryInfC{$B \rightarrow (A \lor B)$}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$ \rightarrow (A \lor B), \neg B$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$ \rightarrow (A \lor B), (\neg A \land \neg B)$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg (\neg A \land \neg B) \rightarrow (A \lor B)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (\neg (\neg A \land \neg B) \supset (A \lor B))$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$ \rightarrow ((A \lor B) \equiv \neg (\neg A \land \neg B))$}
+\end{prooftree}

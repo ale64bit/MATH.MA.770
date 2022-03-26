@@ -1,0 +1,22 @@
+\begin{prooftree}
+\AxiomC{$B(a) \rightarrow B(a)$}
+\RightLabel{[$\forall$L]}
+\UnaryInfC{$\forall x B(x) \rightarrow B(a)$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg B(a), \forall x B(x) \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$\forall x B(x), \neg B(a) \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg B(a) \rightarrow \neg \forall x B(x)$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg \neg \forall x B(x), \neg B(a) \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$\neg B(a), \neg \neg \forall x B(x) \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg \neg \forall x B(x) \rightarrow \neg \neg B(a)$}
+\AxiomC{[$\neg \neg B(a) \rightarrow B(a)$]}
+\RightLabel{[Cut]}
+\BinaryInfC{$\neg \neg \forall x B(x) \rightarrow B(a)$}
+\RightLabel{[$\forall$R]}
+\UnaryInfC{$\neg \neg \forall x B(x) \rightarrow \forall x B(x)$}
+\end{prooftree}

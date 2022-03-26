@@ -1,0 +1,4 @@
+axiom A
+axiom B
+limpl 1 2
+lexch 3 0

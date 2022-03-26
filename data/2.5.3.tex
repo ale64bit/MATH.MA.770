@@ -1,0 +1,30 @@
+\begin{prooftree}
+\AxiomC{$F(a) \rightarrow F(a)$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg F(a), F(a) \rightarrow $}
+\RightLabel{[$\forall$L]}
+\UnaryInfC{$\forall y \neg F(y), F(a) \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$F(a) \rightarrow \neg \forall y \neg F(y)$}
+\RightLabel{[$\exists$L]}
+\UnaryInfC{$\exists x F(x) \rightarrow \neg \forall y \neg F(y)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (\exists x F(x) \supset \neg \forall y \neg F(y))$}
+\AxiomC{$F(a) \rightarrow F(a)$}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$ \rightarrow F(a), \neg F(a)$}
+\RightLabel{[XR]}
+\UnaryInfC{$ \rightarrow \neg F(a), F(a)$}
+\RightLabel{[$\exists$R]}
+\UnaryInfC{$ \rightarrow \neg F(a), \exists x F(x)$}
+\RightLabel{[XR]}
+\UnaryInfC{$ \rightarrow \exists x F(x), \neg F(a)$}
+\RightLabel{[$\forall$R]}
+\UnaryInfC{$ \rightarrow \exists x F(x), \forall y \neg F(y)$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg \forall y \neg F(y) \rightarrow \exists x F(x)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (\neg \forall y \neg F(y) \supset \exists x F(x))$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$ \rightarrow (\exists x F(x) \equiv \neg \forall y \neg F(y))$}
+\end{prooftree}

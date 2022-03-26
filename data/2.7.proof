@@ -1,0 +1,12 @@
+axiom A(a)
+rweak 1 B
+rimpl 2
+rexists 3 a x
+rexch 4 0
+rforall 5 a x
+axiom B
+lweak 7 A(a)
+rimpl 8
+rexists 9 a x
+limpl 6 10
+rcont 11

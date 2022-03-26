@@ -1,0 +1,22 @@
+\begin{prooftree}
+\AxiomC{$A \rightarrow A$}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(A \land B) \rightarrow A$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg A, (A \land B) \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$(A \land B), \neg A \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg A \rightarrow \neg (A \land B)$}
+\AxiomC{$B \rightarrow B$}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(A \land B) \rightarrow B$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg B, (A \land B) \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$(A \land B), \neg B \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg B \rightarrow \neg (A \land B)$}
+\RightLabel{[$\lor$L]}
+\BinaryInfC{$(\neg A \lor \neg B) \rightarrow \neg (A \land B)$}
+\end{prooftree}

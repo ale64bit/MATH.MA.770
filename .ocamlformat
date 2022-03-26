@@ -1,0 +1,3 @@
+profile = conventional
+break-infix-before-func = false
+version = 0.20.1

@@ -1,0 +1,14 @@
+axiom F(a)
+lforall 1 a y
+lneg 2
+lexch 3 0
+rneg 4
+lexists 5 a x
+rneg 1
+rexists 7 a x
+rexch 8 0
+rforall 9 a y
+lneg 10
+rimpl 6
+rimpl 11
+rconj 13 12

@@ -1,0 +1,11 @@
+axiom A
+rlconj 1 B
+lneg 2
+lexch 3 0
+rneg 4
+axiom B
+llconj 6 A
+lneg 7
+lexch 8 0
+rneg 9
+ldisj 5 10

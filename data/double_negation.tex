@@ -1,0 +1,18 @@
+\begin{prooftree}
+\AxiomC{$A \rightarrow A$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg A, A \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$A \rightarrow \neg \neg A$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (A \supset \neg \neg A)$}
+\AxiomC{$A \rightarrow A$}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$ \rightarrow A, \neg A$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg \neg A \rightarrow A$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (\neg \neg A \supset A)$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$ \rightarrow (A \equiv \neg \neg A)$}
+\end{prooftree}

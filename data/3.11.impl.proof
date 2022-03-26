@@ -1,0 +1,4 @@
+premise ~~C -> C
+rimpl 1
+macro "data/3.10.2.proof" A/B, B/C
+cut 2 3

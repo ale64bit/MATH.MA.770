@@ -1,0 +1,13 @@
+\begin{prooftree}
+\AxiomC{$A \rightarrow A$}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$ \rightarrow A, \neg A$}
+\RightLabel{[$\lor$R]}
+\UnaryInfC{$ \rightarrow A, (A \lor \neg A)$}
+\RightLabel{[XR]}
+\UnaryInfC{$ \rightarrow (A \lor \neg A), A$}
+\RightLabel{[$\lor$R]}
+\UnaryInfC{$ \rightarrow (A \lor \neg A), (A \lor \neg A)$}
+\RightLabel{[CR]}
+\UnaryInfC{$ \rightarrow (A \lor \neg A)$}
+\end{prooftree}

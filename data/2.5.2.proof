@@ -1,0 +1,20 @@
+axiom A
+rneg 1
+rexch 2 0
+rrdisj 2 B
+axiom B
+lrdisj 5 ~A
+limpl 4 6
+rexch 4 0
+limpl 8 6
+rcont 9
+rimpl 10
+lneg 1
+rweak 12 B
+lexch 13 0
+rimpl 14
+lweak 5 A
+rimpl 16
+ldisj 15 17
+rimpl 18
+rconj 11 19

@@ -1,0 +1,29 @@
+\begin{prooftree}
+\AxiomC{$\neg A \rightarrow \neg A$}
+\AxiomC{$B \rightarrow B$}
+\doubleLine
+\RightLabel{[2.5.2.L]}
+\BinaryInfC{$(\neg A \supset B) \rightarrow (\neg \neg A \lor B)$}
+\AxiomC{$A \rightarrow A$}
+\RightLabel{[WL]}
+\UnaryInfC{$\neg B, A \rightarrow A$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$A \rightarrow (\neg B \supset A)$}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$ \rightarrow (\neg B \supset A), \neg A$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg \neg A \rightarrow (\neg B \supset A)$}
+\AxiomC{$B \rightarrow B$}
+\RightLabel{[WR]}
+\UnaryInfC{$B \rightarrow B, A$}
+\RightLabel{[XR]}
+\UnaryInfC{$B \rightarrow A, B$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg B, B \rightarrow A$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$B \rightarrow (\neg B \supset A)$}
+\RightLabel{[$\lor$L]}
+\BinaryInfC{$(\neg \neg A \lor B) \rightarrow (\neg B \supset A)$}
+\RightLabel{[Cut]}
+\BinaryInfC{$(\neg A \supset B) \rightarrow (\neg B \supset A)$}
+\end{prooftree}

@@ -1,0 +1,13 @@
+\begin{prooftree}
+\AxiomC{$A \rightarrow A$}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(A \land \neg A) \rightarrow A$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg A, (A \land \neg A) \rightarrow $}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(A \land \neg A), (A \land \neg A) \rightarrow $}
+\RightLabel{[CL]}
+\UnaryInfC{$(A \land \neg A) \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$ \rightarrow \neg (A \land \neg A)$}
+\end{prooftree}

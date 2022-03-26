@@ -1,0 +1,28 @@
+macro "data/detachment.proof" A/A(a), B/B(a)
+lforall 1 a x
+rexists 2 a x
+lexch 3 0
+rimpl 4
+rimpl 3
+lexists 6 a x
+axiom :Ax A(x)
+lneg 8
+rweak 9 B(a)
+axiom A(a)
+rweak 11 B(a)
+rimpl 12
+rexists 13 a x
+rexch 14 0
+rforall 15 a x
+lneg 16
+axiom B(a)
+lweak 18 A(a)
+rimpl 19
+rexists 20 a x
+lexists 21 a x
+ldisj 17 22
+macro "data/2.5.2.L.proof" A/:Ax A(x), B/:Ex B(x)
+cut 24 23
+rimpl 7
+rimpl 25
+rconj 26 27

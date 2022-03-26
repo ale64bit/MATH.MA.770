@@ -1,0 +1,8 @@
+macro "data/detachment.proof" 
+lexch 1 0
+lneg 2
+lexch 3 0
+rneg 4
+lneg 5
+lexch 6 0
+rneg 7

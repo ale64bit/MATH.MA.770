@@ -1,0 +1,31 @@
+axiom A
+rweak 1 B(a)
+axiom B(a)
+rexch 2 0
+limpl 4 3
+rcont 5
+rexists 6 a x
+rimpl 7
+lexch 7 0
+rimpl 9
+lexists 10 a x
+rimpl 11
+rneg 1
+lneg 1
+rweak 14 B(a)
+rimpl 15
+lexch 15 0
+rimpl 17
+rexists 18 a x
+lweak 3 A
+lexch 20 0
+rimpl 21
+rimpl 20
+rexists 23 a x
+lexists 24 a x
+ldisj 19 25
+macro "data/2.5.2.proof" B/:Ex B(x)
+macro "data/2.5.2.L.proof" B/:Ex B(x)
+cut 28 26
+rimpl 29
+rconj 12 30

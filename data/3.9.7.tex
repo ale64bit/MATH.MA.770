@@ -1,0 +1,72 @@
+\begin{prooftree}
+\AxiomC{$A \rightarrow A$}
+\RightLabel{[WL]}
+\UnaryInfC{$B, A \rightarrow A$}
+\RightLabel{[XL]}
+\UnaryInfC{$A, B \rightarrow A$}
+\AxiomC{$B \rightarrow B$}
+\RightLabel{[WL]}
+\UnaryInfC{$A, B \rightarrow B$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$A, B \rightarrow (A \land B)$}
+\RightLabel{[$\lor$R]}
+\UnaryInfC{$A, B \rightarrow ((A \land B) \lor C)$}
+\AxiomC{$C \rightarrow C$}
+\RightLabel{[WL]}
+\UnaryInfC{$B, C \rightarrow C$}
+\RightLabel{[XL]}
+\UnaryInfC{$C, B \rightarrow C$}
+\RightLabel{[$\lor$R]}
+\UnaryInfC{$C, B \rightarrow ((A \land B) \lor C)$}
+\RightLabel{[$\lor$L]}
+\BinaryInfC{$(A \lor C), B \rightarrow ((A \land B) \lor C)$}
+\RightLabel{[XL]}
+\UnaryInfC{$B, (A \lor C) \rightarrow ((A \land B) \lor C)$}
+\AxiomC{$C \rightarrow C$}
+\RightLabel{[$\lor$R]}
+\UnaryInfC{$C \rightarrow ((A \land B) \lor C)$}
+\RightLabel{[WL]}
+\UnaryInfC{$(A \lor C), C \rightarrow ((A \land B) \lor C)$}
+\RightLabel{[XL]}
+\UnaryInfC{$C, (A \lor C) \rightarrow ((A \land B) \lor C)$}
+\RightLabel{[$\lor$L]}
+\BinaryInfC{$(B \lor C), (A \lor C) \rightarrow ((A \land B) \lor C)$}
+\RightLabel{[XL]}
+\UnaryInfC{$(A \lor C), (B \lor C) \rightarrow ((A \land B) \lor C)$}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$((A \lor C) \land (B \lor C)), (B \lor C) \rightarrow ((A \land B) \lor C)$}
+\RightLabel{[XL]}
+\UnaryInfC{$(B \lor C), ((A \lor C) \land (B \lor C)) \rightarrow ((A \land B) \lor C)$}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$((A \lor C) \land (B \lor C)), ((A \lor C) \land (B \lor C)) \rightarrow ((A \land B) \lor C)$}
+\RightLabel{[CL]}
+\UnaryInfC{$((A \lor C) \land (B \lor C)) \rightarrow ((A \land B) \lor C)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (((A \lor C) \land (B \lor C)) \supset ((A \land B) \lor C))$}
+\AxiomC{$A \rightarrow A$}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(A \land B) \rightarrow A$}
+\RightLabel{[$\lor$R]}
+\UnaryInfC{$(A \land B) \rightarrow (A \lor C)$}
+\AxiomC{$C \rightarrow C$}
+\RightLabel{[$\lor$R]}
+\UnaryInfC{$C \rightarrow (A \lor C)$}
+\RightLabel{[$\lor$L]}
+\BinaryInfC{$((A \land B) \lor C) \rightarrow (A \lor C)$}
+\AxiomC{$B \rightarrow B$}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(A \land B) \rightarrow B$}
+\RightLabel{[$\lor$R]}
+\UnaryInfC{$(A \land B) \rightarrow (B \lor C)$}
+\AxiomC{$C \rightarrow C$}
+\RightLabel{[$\lor$R]}
+\UnaryInfC{$C \rightarrow (B \lor C)$}
+\RightLabel{[$\lor$L]}
+\BinaryInfC{$((A \land B) \lor C) \rightarrow (B \lor C)$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$((A \land B) \lor C) \rightarrow ((A \lor C) \land (B \lor C))$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (((A \land B) \lor C) \supset ((A \lor C) \land (B \lor C)))$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$ \rightarrow (((A \lor C) \land (B \lor C)) \equiv ((A \land B) \lor C))$}
+\end{prooftree}

@@ -1,0 +1,30 @@
+\begin{prooftree}
+\AxiomC{$A \rightarrow A$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg A, A \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$A \rightarrow \neg \neg A$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg \neg \neg A, A \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$A, \neg \neg \neg A \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg \neg \neg A \rightarrow \neg A$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (\neg \neg \neg A \supset \neg A)$}
+\AxiomC{$A \rightarrow A$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg A, A \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$A, \neg A \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg A \rightarrow \neg A$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg \neg A, \neg A \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg A \rightarrow \neg \neg \neg A$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (\neg A \supset \neg \neg \neg A)$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$ \rightarrow (\neg \neg \neg A \equiv \neg A)$}
+\end{prooftree}

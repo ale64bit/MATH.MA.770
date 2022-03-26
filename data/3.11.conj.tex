@@ -1,0 +1,40 @@
+\begin{prooftree}
+\AxiomC{$B \rightarrow B$}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(B \land C) \rightarrow B$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg B, (B \land C) \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$(B \land C), \neg B \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg B \rightarrow \neg (B \land C)$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg \neg (B \land C), \neg B \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$\neg B, \neg \neg (B \land C) \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg \neg (B \land C) \rightarrow \neg \neg B$}
+\AxiomC{[$\neg \neg B \rightarrow B$]}
+\RightLabel{[Cut]}
+\BinaryInfC{$\neg \neg (B \land C) \rightarrow B$}
+\AxiomC{$C \rightarrow C$}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(B \land C) \rightarrow C$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg C, (B \land C) \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$(B \land C), \neg C \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg C \rightarrow \neg (B \land C)$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg \neg (B \land C), \neg C \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$\neg C, \neg \neg (B \land C) \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg \neg (B \land C) \rightarrow \neg \neg C$}
+\AxiomC{[$\neg \neg C \rightarrow C$]}
+\RightLabel{[Cut]}
+\BinaryInfC{$\neg \neg (B \land C) \rightarrow C$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$\neg \neg (B \land C) \rightarrow (B \land C)$}
+\end{prooftree}

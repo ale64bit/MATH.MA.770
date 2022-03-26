@@ -1,0 +1,10 @@
+(library
+ (name lib)
+ (libraries sedlex menhirLib)
+ (preprocess
+  (pps sedlex.ppx))
+ (flags :standard -w +39))
+
+(menhir
+ (modules parser)
+ (flags --explain --strict --dump))

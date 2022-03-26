@@ -1,0 +1,11 @@
+axiom B(a)
+lforall 1 a x
+lneg 2
+lexch 3 0
+rneg 4
+lneg 5
+lexch 6 0
+rneg 7
+premise ~~B(a) -> B(a)
+cut 8 9
+rforall 10 a x

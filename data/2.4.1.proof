@@ -1,0 +1,7 @@
+axiom A
+rneg 1
+rexch 2 0
+lrdisj 2 A
+rexch 4 0
+rrdisj 5 ~A
+rcont 6

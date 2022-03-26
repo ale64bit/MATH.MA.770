@@ -1,0 +1,55 @@
+\begin{prooftree}
+\AxiomC{$A(a) \rightarrow A(a)$}
+\RightLabel{[WR]}
+\UnaryInfC{$A(a) \rightarrow A(a), B$}
+\RightLabel{[XR]}
+\UnaryInfC{$A(a) \rightarrow B, A(a)$}
+\AxiomC{$B \rightarrow B$}
+\RightLabel{[$\supset$L]}
+\BinaryInfC{$(A(a) \supset B), A(a) \rightarrow B, B$}
+\RightLabel{[CR]}
+\UnaryInfC{$(A(a) \supset B), A(a) \rightarrow B$}
+\RightLabel{[XL]}
+\UnaryInfC{$A(a), (A(a) \supset B) \rightarrow B$}
+\RightLabel{[$\forall$L]}
+\UnaryInfC{$\forall x A(x), (A(a) \supset B) \rightarrow B$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$(A(a) \supset B) \rightarrow (\forall x A(x) \supset B)$}
+\RightLabel{[$\exists$L]}
+\UnaryInfC{$\exists x (A(x) \supset B) \rightarrow (\forall x A(x) \supset B)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (\exists x (A(x) \supset B) \supset (\forall x A(x) \supset B))$}
+\AxiomC{$\forall x A(x) \rightarrow \forall x A(x)$}
+\AxiomC{$B \rightarrow B$}
+\doubleLine
+\RightLabel{[2.5.2.L]}
+\BinaryInfC{$(\forall x A(x) \supset B) \rightarrow (\neg \forall x A(x) \lor B)$}
+\AxiomC{$A(a) \rightarrow A(a)$}
+\RightLabel{[WR]}
+\UnaryInfC{$A(a) \rightarrow A(a), B$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow A(a), (A(a) \supset B)$}
+\RightLabel{[$\exists$R]}
+\UnaryInfC{$ \rightarrow A(a), \exists x (A(x) \supset B)$}
+\RightLabel{[XR]}
+\UnaryInfC{$ \rightarrow \exists x (A(x) \supset B), A(a)$}
+\RightLabel{[$\forall$R]}
+\UnaryInfC{$ \rightarrow \exists x (A(x) \supset B), \forall x A(x)$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg \forall x A(x) \rightarrow \exists x (A(x) \supset B)$}
+\AxiomC{$B \rightarrow B$}
+\RightLabel{[WL]}
+\UnaryInfC{$A(a), B \rightarrow B$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$B \rightarrow (A(a) \supset B)$}
+\RightLabel{[$\exists$R]}
+\UnaryInfC{$B \rightarrow \exists x (A(x) \supset B)$}
+\RightLabel{[$\lor$L]}
+\BinaryInfC{$(\neg \forall x A(x) \lor B) \rightarrow \exists x (A(x) \supset B)$}
+\RightLabel{[Cut]}
+\BinaryInfC{$(\forall x A(x) \supset B) \rightarrow \exists x (A(x) \supset B)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow ((\forall x A(x) \supset B) \supset \exists x (A(x) \supset B))$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$ \rightarrow (\exists x (A(x) \supset B) \equiv (\forall x A(x) \supset B))$}
+\end{prooftree}

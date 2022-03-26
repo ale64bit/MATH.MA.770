@@ -1,0 +1,16 @@
+\begin{prooftree}
+\AxiomC{$A \rightarrow A$}
+\AxiomC{$B \rightarrow B$}
+\doubleLine
+\RightLabel{[3.10.1]}
+\BinaryInfC{$\neg \neg (A \supset B), A \rightarrow \neg \neg B$}
+\AxiomC{$B \rightarrow B$}
+\RightLabel{[$\supset$L]}
+\BinaryInfC{$(\neg \neg B \supset B), \neg \neg (A \supset B), A \rightarrow B$}
+\RightLabel{[XL]}
+\UnaryInfC{$(\neg \neg B \supset B), A, \neg \neg (A \supset B) \rightarrow B$}
+\RightLabel{[XL]}
+\UnaryInfC{$A, (\neg \neg B \supset B), \neg \neg (A \supset B) \rightarrow B$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$(\neg \neg B \supset B), \neg \neg (A \supset B) \rightarrow (A \supset B)$}
+\end{prooftree}

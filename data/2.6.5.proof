@@ -1,0 +1,14 @@
+axiom A
+lweak 1 B
+rimpl 2
+rneg 3
+lneg 4
+axiom B
+rweak 6 A
+rexch 7 0
+lneg 8
+lexch 9 0
+rimpl 10
+ldisj 5 11
+macro "data/2.5.2.L.proof" A/~A, B/~B
+cut 13 12

@@ -1,0 +1,4 @@
+macro "data/detachment.proof" B/B(a)
+rexists 1 a x
+rimpl 2
+lexists 3 a x

@@ -1,0 +1,18 @@
+axiom A            
+lneg 1
+rlconj 2 ~B
+rneg 3
+axiom B
+lneg 5
+llconj 6 ~A
+rneg 7
+ldisj 4 8
+rimpl 9
+rrdisj 1 B
+rneg 11
+lrdisj 5 A
+rneg 13
+rconj 12 14
+lneg 15
+rimpl 16
+rconj 10 17

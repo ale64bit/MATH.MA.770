@@ -1,0 +1,24 @@
+axiom A
+rrdisj 1 B
+lneg 2
+lexch 3 0
+rneg 4
+axiom B
+lrdisj 6 A
+lneg 7
+lexch 8 0
+rneg 9
+ldisj 4 9
+rconj 5 10
+lneg 1
+rlconj 13 ~B
+lexch 14 0
+lneg 6
+rlconj 16 ~A
+llconj 16 ~A
+lexch 18 0
+ldisj 15 19
+rneg 20
+rimpl 12
+rimpl 21
+rconj 22 23

@@ -1,0 +1,11 @@
+\begin{prooftree}
+\AxiomC{$F(a) \rightarrow F(a)$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg F(a), F(a) \rightarrow $}
+\RightLabel{[$\forall$L]}
+\UnaryInfC{$\forall y \neg F(y), F(a) \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$F(a) \rightarrow \neg \forall y \neg F(y)$}
+\RightLabel{[$\exists$L]}
+\UnaryInfC{$\exists x F(x) \rightarrow \neg \forall y \neg F(y)$}
+\end{prooftree}

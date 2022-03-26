@@ -1,0 +1,9 @@
+axiom A
+lneg 1
+rweak 2 B
+lexch 3 0
+rimpl 4
+axiom B
+lweak 6 A
+rimpl 7
+ldisj 5 8

@@ -1,0 +1,6 @@
+axiom F(a)
+rexists 1 a x
+rneg 2
+rforall 3 a y
+lneg 4
+rimpl 5

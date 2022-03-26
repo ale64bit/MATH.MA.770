@@ -1,0 +1,13 @@
+\begin{prooftree}
+\AxiomC{$F(a) \rightarrow F(a)$}
+\RightLabel{[$\exists$R]}
+\UnaryInfC{$F(a) \rightarrow \exists x F(x)$}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$ \rightarrow \exists x F(x), \neg F(a)$}
+\RightLabel{[$\forall$R]}
+\UnaryInfC{$ \rightarrow \exists x F(x), \forall y \neg F(y)$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg \forall y \neg F(y) \rightarrow \exists x F(x)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (\neg \forall y \neg F(y) \supset \exists x F(x))$}
+\end{prooftree}

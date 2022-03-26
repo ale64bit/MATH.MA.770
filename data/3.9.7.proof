@@ -1,0 +1,45 @@
+axiom A
+rlconj 1 B
+rrdisj 2 C
+axiom B
+llconj 4 A
+rrdisj 5 C
+axiom C
+lrdisj 7 A
+ldisj 3 8
+lrdisj 7 B
+ldisj 6 10
+rconj 9 11
+lweak 1 (B | C)
+lexch 13 0
+axiom (B | C)
+lweak 15 A
+rconj 14 16
+rrdisj 17 C
+lweak 1 B
+lexch 19 0
+lweak 4 A
+rconj 20 21
+rrdisj 22 C
+lweak 7 B
+lexch 24 0
+lrdisj 25 (A | B)
+lrdisj 25 (A & B)
+ldisj 23 27
+lrdisj 7 (A & B)
+lexch 28 0
+lweak 29 (A | C)
+lexch 31 0
+ldisj 30 32
+lexch 33 0
+rlconj 15 (A | C)
+cut 35 33
+axiom (A | C)
+lexch 36 0
+rlconj 34 (B | C)
+lexch 39 0
+llconj 40 (A | C)
+lcont 41
+rimpl 42
+rimpl 12
+rconj 43 44

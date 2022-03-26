@@ -1,0 +1,8 @@
+axiom A
+axiom B
+lneg 2
+limpl 1 3
+lexch 4 0
+lexch 5 1
+rneg 6
+rimpl 7

@@ -1,0 +1,47 @@
+axiom A(a)
+axiom B
+rweak 2 A(a)
+rexch 3 0
+limpl 3 1
+limpl 4 1
+limpl 3 2
+rcont 7
+rweak 1 B
+rexch 9 0
+limpl 10 2
+rcont 11
+lexch 12 0
+lforall 13 a x
+lexch 14 0
+rimpl 15
+rimpl 14
+lexists 17 a x
+axiom :Ax A(x)
+rneg 19
+lneg 19
+rweak 21 B
+rimpl 22
+lexch 22 0
+rimpl 24
+rweak 2 :Ax A(x)
+lweak 2 :Ax A(x)
+lexch 27 0
+rimpl 28
+rimpl 27
+ldisj 25 30
+macro "data/2.5.2.L.proof" A/:Ax A(x)
+cut 32 31
+rimpl 10
+rimpl 9
+rexists 35 a x
+rexch 36 0
+rforall 37 a x
+lneg 38
+lweak 2 A(a)
+rimpl 40
+rexists 41 a x
+ldisj 39 42
+cut 32 43
+rimpl 18
+rimpl 44
+rconj 45 46

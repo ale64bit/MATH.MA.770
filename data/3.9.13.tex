@@ -1,0 +1,15 @@
+\begin{prooftree}
+\AxiomC{$A(a) \rightarrow A(a)$}
+\AxiomC{$B(a) \rightarrow B(a)$}
+\doubleLine
+\RightLabel{[detachment]}
+\BinaryInfC{$A(a), (A(a) \supset B(a)) \rightarrow B(a)$}
+\RightLabel{[$\exists$R]}
+\UnaryInfC{$A(a), (A(a) \supset B(a)) \rightarrow \exists x B(x)$}
+\RightLabel{[$\forall$L]}
+\UnaryInfC{$\forall x A(x), (A(a) \supset B(a)) \rightarrow \exists x B(x)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$(A(a) \supset B(a)) \rightarrow (\forall x A(x) \supset \exists x B(x))$}
+\RightLabel{[$\exists$L]}
+\UnaryInfC{$\exists x (A(x) \supset B(x)) \rightarrow (\forall x A(x) \supset \exists x B(x))$}
+\end{prooftree}

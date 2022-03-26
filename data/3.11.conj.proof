@@ -1,0 +1,21 @@
+axiom B
+rlconj 1 C
+lneg 2
+lexch 3 0
+rneg 4
+lneg 5
+lexch 6 0
+rneg 7
+axiom C
+llconj 9 B
+lneg 10
+lexch 11 0
+rneg 12
+lneg 13
+lexch 14 0
+rneg 15
+premise ~~B -> B
+cut 8 17
+premise ~~C -> C
+cut 16 19
+rconj 18 20

@@ -1,0 +1,5 @@
+axiom F(a)
+lneg 1
+lforall 2 a y
+rneg 3
+lexists 4 a x

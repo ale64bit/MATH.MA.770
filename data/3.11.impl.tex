@@ -1,0 +1,12 @@
+\begin{prooftree}
+\AxiomC{[$\neg \neg C \rightarrow C$]}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (\neg \neg C \supset C)$}
+\AxiomC{$B \rightarrow B$}
+\AxiomC{$C \rightarrow C$}
+\doubleLine
+\RightLabel{[3.10.2]}
+\BinaryInfC{$(\neg \neg C \supset C), \neg \neg (B \supset C) \rightarrow (B \supset C)$}
+\RightLabel{[Cut]}
+\BinaryInfC{$\neg \neg (B \supset C) \rightarrow (B \supset C)$}
+\end{prooftree}
