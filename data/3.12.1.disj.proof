@@ -1,0 +1,20 @@
+premise B -> B*
+premise C -> C*
+lneg 1
+lneg 2
+rlconj 3 ~C*
+llconj 4 ~B*
+rneg 5
+rneg 6
+ldisj 7 8
+premise B* -> B
+premise C* -> C
+rrdisj 10 C
+lrdisj 11 B
+rneg 12
+rneg 13
+rconj 14 15
+lneg 16
+rimpl 9
+rimpl 17
+rconj 18 19

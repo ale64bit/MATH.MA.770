@@ -1,0 +1,13 @@
+\begin{prooftree}
+\AxiomC{$(\neg B^* \land \neg C^*) \rightarrow (\neg B^* \land \neg C^*)$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg (\neg B^* \land \neg C^*), (\neg B^* \land \neg C^*) \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$(\neg B^* \land \neg C^*) \rightarrow \neg \neg (\neg B^* \land \neg C^*)$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg \neg \neg (\neg B^* \land \neg C^*), (\neg B^* \land \neg C^*) \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$(\neg B^* \land \neg C^*), \neg \neg \neg (\neg B^* \land \neg C^*) \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg \neg \neg (\neg B^* \land \neg C^*) \rightarrow \neg (\neg B^* \land \neg C^*)$}
+\end{prooftree}

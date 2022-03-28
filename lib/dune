@@ -1,6 +1,6 @@
 (library
  (name lib)
- (libraries sedlex menhirLib)
+ (libraries sedlex menhirLib str)
  (preprocess
   (pps sedlex.ppx))
  (flags :standard -w +39))

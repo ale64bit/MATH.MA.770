@@ -1,0 +1,13 @@
+premise B(a) -> B*(a)
+lneg 1
+lforall 2 a x
+rneg 3
+lexists 4 a x
+premise B*(a) -> B(a)
+rexists 6 a x
+rneg 7
+rforall 8 a x
+lneg 9
+rimpl 5
+rimpl 10
+rconj 11 12

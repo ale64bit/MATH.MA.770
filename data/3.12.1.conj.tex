@@ -1,0 +1,24 @@
+\begin{prooftree}
+\AxiomC{[$B \rightarrow B^*$]}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(B \land C) \rightarrow B^*$}
+\AxiomC{[$C \rightarrow C^*$]}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(B \land C) \rightarrow C^*$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$(B \land C) \rightarrow (B^* \land C^*)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow ((B \land C) \supset (B^* \land C^*))$}
+\AxiomC{[$B^* \rightarrow B$]}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(B^* \land C^*) \rightarrow B$}
+\AxiomC{[$C^* \rightarrow C$]}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(B^* \land C^*) \rightarrow C$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$(B^* \land C^*) \rightarrow (B \land C)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow ((B^* \land C^*) \supset (B \land C))$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$ \rightarrow ((B \land C) \equiv (B^* \land C^*))$}
+\end{prooftree}

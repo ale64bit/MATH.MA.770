@@ -1,0 +1,11 @@
+premise B -> B*
+premise B* -> B
+lneg 1
+lexch 3 0
+rneg 4
+rimpl 5
+lneg 2
+lexch 7 0
+rneg 8
+rimpl 9
+rconj 10 6

@@ -1,0 +1,24 @@
+\begin{prooftree}
+\AxiomC{[$B^* \rightarrow B$]}
+\AxiomC{[$C \rightarrow C^*$]}
+\RightLabel{[$\supset$L]}
+\BinaryInfC{$(B \supset C), B^* \rightarrow C^*$}
+\RightLabel{[XL]}
+\UnaryInfC{$B^*, (B \supset C) \rightarrow C^*$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$(B \supset C) \rightarrow (B^* \supset C^*)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow ((B \supset C) \supset (B^* \supset C^*))$}
+\AxiomC{[$B \rightarrow B^*$]}
+\AxiomC{[$C^* \rightarrow C$]}
+\RightLabel{[$\supset$L]}
+\BinaryInfC{$(B^* \supset C^*), B \rightarrow C$}
+\RightLabel{[XL]}
+\UnaryInfC{$B, (B^* \supset C^*) \rightarrow C$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$(B^* \supset C^*) \rightarrow (B \supset C)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow ((B^* \supset C^*) \supset (B \supset C))$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$ \rightarrow ((B \supset C) \equiv (B^* \supset C^*))$}
+\end{prooftree}

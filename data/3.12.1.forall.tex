@@ -1,0 +1,18 @@
+\begin{prooftree}
+\AxiomC{[$B(a) \rightarrow B^*(a)$]}
+\RightLabel{[$\forall$L]}
+\UnaryInfC{$\forall x B(x) \rightarrow B^*(a)$}
+\RightLabel{[$\forall$R]}
+\UnaryInfC{$\forall x B(x) \rightarrow \forall x B^*(x)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (\forall x B(x) \supset \forall x B^*(x))$}
+\AxiomC{[$B^*(a) \rightarrow B(a)$]}
+\RightLabel{[$\forall$L]}
+\UnaryInfC{$\forall x B^*(x) \rightarrow B(a)$}
+\RightLabel{[$\forall$R]}
+\UnaryInfC{$\forall x B^*(x) \rightarrow \forall x B(x)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (\forall x B^*(x) \supset \forall x B(x))$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$ \rightarrow (\forall x B(x) \equiv \forall x B^*(x))$}
+\end{prooftree}

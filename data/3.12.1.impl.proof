@@ -1,0 +1,13 @@
+premise B* -> B
+premise C -> C*
+limpl 1 2
+lexch 3 0
+rimpl 4
+premise B -> B*
+premise C* -> C
+limpl 6 7
+lexch 8 0
+rimpl 9
+rimpl 5
+rimpl 10
+rconj 11 12

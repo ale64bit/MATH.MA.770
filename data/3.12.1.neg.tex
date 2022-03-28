@@ -1,0 +1,22 @@
+\begin{prooftree}
+\AxiomC{[$B^* \rightarrow B$]}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg B, B^* \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$B^*, \neg B \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg B \rightarrow \neg B^*$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (\neg B \supset \neg B^*)$}
+\AxiomC{[$B \rightarrow B^*$]}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg B^*, B \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$B, \neg B^* \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg B^* \rightarrow \neg B$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (\neg B^* \supset \neg B)$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$ \rightarrow (\neg B \equiv \neg B^*)$}
+\end{prooftree}

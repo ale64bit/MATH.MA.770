@@ -1,0 +1,9 @@
+axiom A
+lneg 1
+lexch 2 0
+rneg 3
+lneg 4
+rneg 5
+lneg 6
+lexch 7 0
+rneg 8

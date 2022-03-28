@@ -1,0 +1,9 @@
+premise B(a) -> B*(a)
+lforall 1 a x
+rforall 2 a x
+premise B*(a) -> B(a)
+lforall 4 a x
+rforall 5 a x
+rimpl 3
+rimpl 6
+rconj 7 8

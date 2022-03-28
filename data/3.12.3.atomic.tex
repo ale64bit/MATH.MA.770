@@ -1,0 +1,19 @@
+\begin{prooftree}
+\AxiomC{$A \rightarrow A$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg A, A \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$A, \neg A \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg A \rightarrow \neg A$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg \neg A, \neg A \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg A \rightarrow \neg \neg \neg A$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg \neg \neg \neg A, \neg A \rightarrow $}
+\RightLabel{[XL]}
+\UnaryInfC{$\neg A, \neg \neg \neg \neg A \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$\neg \neg \neg \neg A \rightarrow \neg \neg A$}
+\end{prooftree}

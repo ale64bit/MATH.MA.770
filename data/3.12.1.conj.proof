@@ -1,0 +1,13 @@
+premise B -> B*
+premise C -> C*
+rlconj 1 C
+llconj 2 B
+rconj 3 4
+premise B* -> B
+premise C* -> C
+rlconj 6 C*
+llconj 7 B*
+rconj 8 9
+rimpl 5
+rimpl 10
+rconj 11 12

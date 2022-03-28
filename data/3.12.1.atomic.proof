@@ -1,0 +1,8 @@
+axiom A
+lneg 1
+rneg 2
+rneg 1
+lneg 4
+rimpl 3
+rimpl 5
+rconj 6 7

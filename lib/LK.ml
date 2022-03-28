@@ -176,7 +176,9 @@ let rec tex_of_formula = function
         | _ ->
             Printf.sprintf "(%s)" (String.concat "," (List.map tex_of_term ts))
       in
-      Printf.sprintf "%s%s" a args
+      Printf.sprintf "%s%s"
+        (Str.global_replace (Str.regexp_string "*") "^*" a)
+        args
 
 let tex_of_sequent (antecedent, succedent) =
   Printf.sprintf "%s \\rightarrow %s"

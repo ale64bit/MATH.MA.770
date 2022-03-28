@@ -1,0 +1,16 @@
+\begin{prooftree}
+  \AxiomC{$D \rightarrow D$}
+  \RightLabel{[$\neg$L]}
+  \UnaryInfC{$\neg D, D \rightarrow$}
+  \RightLabel{[$\neg$R]}
+  \UnaryInfC{$D \rightarrow \neg \neg D$}
+  \AxiomC{$D, D, \Gamma \rightarrow \Delta$}
+  \RightLabel{[$\neg$R, $\neg$R]}
+  \UnaryInfC{$\Gamma \rightarrow \Delta, \neg D, \neg D$}
+  \RightLabel{[CR]}
+  \UnaryInfC{$\Gamma \rightarrow \Delta, \neg D$}
+  \RightLabel{[$\neg$L]}
+  \UnaryInfC{$\neg \neg D, \Gamma \rightarrow \Delta$}
+  \RightLabel{[Cut]}
+  \BinaryInfC{$D, \Gamma \rightarrow \Delta$}
+\end{prooftree}

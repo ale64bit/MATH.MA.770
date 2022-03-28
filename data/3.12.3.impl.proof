@@ -1,0 +1,5 @@
+macro "data/3.10.1.proof" A/B*, B/C*
+premise ~~C* -> C*
+cut 1 2
+lexch 3 0
+rimpl 4

@@ -1,0 +1,38 @@
+\begin{prooftree}
+\AxiomC{[$B \rightarrow B^*$]}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg B^*, B \rightarrow $}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(\neg B^* \land \neg C^*), B \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$B \rightarrow \neg (\neg B^* \land \neg C^*)$}
+\AxiomC{[$C \rightarrow C^*$]}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg C^*, C \rightarrow $}
+\RightLabel{[$\land$L]}
+\UnaryInfC{$(\neg B^* \land \neg C^*), C \rightarrow $}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$C \rightarrow \neg (\neg B^* \land \neg C^*)$}
+\RightLabel{[$\lor$L]}
+\BinaryInfC{$(B \lor C) \rightarrow \neg (\neg B^* \land \neg C^*)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow ((B \lor C) \supset \neg (\neg B^* \land \neg C^*))$}
+\AxiomC{[$B^* \rightarrow B$]}
+\RightLabel{[$\lor$R]}
+\UnaryInfC{$B^* \rightarrow (B \lor C)$}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$ \rightarrow (B \lor C), \neg B^*$}
+\AxiomC{[$C^* \rightarrow C$]}
+\RightLabel{[$\lor$R]}
+\UnaryInfC{$C^* \rightarrow (B \lor C)$}
+\RightLabel{[$\neg$R]}
+\UnaryInfC{$ \rightarrow (B \lor C), \neg C^*$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$ \rightarrow (B \lor C), (\neg B^* \land \neg C^*)$}
+\RightLabel{[$\neg$L]}
+\UnaryInfC{$\neg (\neg B^* \land \neg C^*) \rightarrow (B \lor C)$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$ \rightarrow (\neg (\neg B^* \land \neg C^*) \supset (B \lor C))$}
+\RightLabel{[$\land$R]}
+\BinaryInfC{$ \rightarrow ((B \lor C) \equiv \neg (\neg B^* \land \neg C^*))$}
+\end{prooftree}

@@ -1,0 +1,14 @@
+\begin{prooftree}
+\AxiomC{$B^* \rightarrow B^*$}
+\AxiomC{$C^* \rightarrow C^*$}
+\doubleLine
+\RightLabel{[3.10.1]}
+\BinaryInfC{$\neg \neg (B^* \supset C^*), B^* \rightarrow \neg \neg C^*$}
+\AxiomC{[$\neg \neg C^* \rightarrow C^*$]}
+\RightLabel{[Cut]}
+\BinaryInfC{$\neg \neg (B^* \supset C^*), B^* \rightarrow C^*$}
+\RightLabel{[XL]}
+\UnaryInfC{$B^*, \neg \neg (B^* \supset C^*) \rightarrow C^*$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$\neg \neg (B^* \supset C^*) \rightarrow (B^* \supset C^*)$}
+\end{prooftree}
