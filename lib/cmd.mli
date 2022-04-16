@@ -25,6 +25,9 @@ type cmd =
   | TeX of string
   | Clear
   | Mode of mode
+  | Nop
+  | CutElim
+  | ReductionTree of LK.sequent
 
 val string_of_mode : mode -> string
 val string_of_cmd : cmd -> string

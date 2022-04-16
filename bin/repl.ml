@@ -404,10 +404,16 @@ and handle_cmd mode proof cmd =
       Ok (mode, proof, LK.empty_sequent)
   | Clear -> Ok (Cmd.Classic, Proof.empty, LK.empty_sequent)
   | Mode mode' ->
-      if mode != mode' then
+      if not (mode = mode') then
         Printf.printf "  mode switched from %s to %s. Proof cleared.\n"
           (Cmd.string_of_mode mode) (Cmd.string_of_mode mode');
       Ok (mode', Proof.empty, LK.empty_sequent)
+  | Nop -> Ok (mode, proof, LK.empty_sequent)
+  | CutElim -> Ok (mode, Proof.cut_elimination proof, LK.empty_sequent)
+  | ReductionTree s ->
+      let rt = ReductionTree.reduction_tree s in
+      Printf.printf "%s\n%!" (ReductionTree.tex_of_tree rt);
+      Ok (mode, proof, LK.empty_sequent)
 
 let rec loop channel mode proof =
   Printf.printf "> %!";

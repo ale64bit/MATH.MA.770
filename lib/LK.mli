@@ -16,16 +16,18 @@ type formula =
   | ForAll of var * formula
   | Formula of string * term list
 
-type sequent = formula list * formula list
+type cedent = formula list
+type sequent = cedent * cedent
 type side = Left | Right
 
 type inference =
-  | Axiom of formula
   | Premise of sequent
+  | Axiom of formula
   | Weakening of side * sequent
   | Contraction of side * sequent
   | Exchange of side * sequent * int
   | Cut of sequent * sequent
+  | Mix of sequent * sequent * formula
   | NegIntro of side * sequent
   | ConjLeft of side * sequent
   | ConjRight of sequent * sequent
@@ -39,7 +41,12 @@ type inference =
   | ExistsRight of sequent * term * var
   | Macro of string * (formula * formula) list * sequent list
 
+type assignment = var -> bool
+type 'a interpretation = term -> assignment -> 'a
+
 val empty_sequent : sequent
+val antecedent : sequent -> cedent
+val succedent : sequent -> cedent
 
 (* Convert to human-readable string *)
 val string_of_side : side -> string
@@ -63,7 +70,11 @@ val tex_of_sequent : sequent -> string
 (* A set of variables *)
 module VarSet : Set.S with type elt = var
 
+(* A set of formulas *)
+module FormulaSet : Set.S with type elt = formula
+
 val substitute_term : formula -> term -> term -> formula
 val validate_formula : formula -> (VarSet.t, string) result
 val validate_sequent : sequent -> (VarSet.t, string) result
+val valid_inference : inference -> sequent -> bool
 val with_replacements : (formula * formula) list -> formula -> formula

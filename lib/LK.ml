@@ -16,16 +16,18 @@ type formula =
   | ForAll of var * formula
   | Formula of string * term list
 
-type sequent = formula list * formula list
+type cedent = formula list
+type sequent = cedent * cedent
 type side = Left | Right
 
 type inference =
-  | Axiom of formula
   | Premise of sequent
+  | Axiom of formula
   | Weakening of side * sequent
   | Contraction of side * sequent
   | Exchange of side * sequent * int
   | Cut of sequent * sequent
+  | Mix of sequent * sequent * formula
   | NegIntro of side * sequent
   | ConjLeft of side * sequent
   | ConjRight of sequent * sequent
@@ -39,7 +41,12 @@ type inference =
   | ExistsRight of sequent * term * var
   | Macro of string * (formula * formula) list * sequent list
 
+type assignment = var -> bool
+type 'a interpretation = term -> assignment -> 'a
+
 let empty_sequent = ([], [])
+let antecedent (ant, _) = ant
+let succedent (_, suc) = suc
 let string_of_side = function Left -> "L" | Right -> "R"
 let string_of_var = function Free a -> a | Bound x -> x
 
@@ -191,6 +198,12 @@ module VarSet = Set.Make (struct
   let compare = Stdlib.compare
 end)
 
+module FormulaSet = Set.Make (struct
+  type t = formula
+
+  let compare = Stdlib.compare
+end)
+
 let substitute_term f s t =
   let rec aux_term = function
     | s' when s = s' -> t
@@ -291,3 +304,121 @@ let rec with_replacements repl f =
       | Exists (x, f) -> Exists (x, f |> with_replacements repl)
       | ForAll (x, f) -> ForAll (x, f |> with_replacements repl)
       | other -> other)
+
+let rec is_subterm_of_term t = function
+  | Const _ as t' -> t = t'
+  | Var _ as t' -> t = t'
+  | Fun (_, ts) as t' -> t = t' || List.exists (is_subterm_of_term t) ts
+  | Term (_, ts) as t' -> t = t' || List.exists (is_subterm_of_term t) ts
+
+let rec is_subterm_of_formula t = function
+  | Atom (_, ts) -> List.exists (is_subterm_of_term t) ts
+  | Neg a -> is_subterm_of_formula t a
+  | Disj (a, b) -> is_subterm_of_formula t a || is_subterm_of_formula t b
+  | Conj (a, b) -> is_subterm_of_formula t a || is_subterm_of_formula t b
+  | Impl (a, b) -> is_subterm_of_formula t a || is_subterm_of_formula t b
+  | Exists (_, a) -> is_subterm_of_formula t a
+  | ForAll (_, a) -> is_subterm_of_formula t a
+  | Formula (_, ts) -> List.exists (is_subterm_of_term t) ts
+
+let valid_inference inf s =
+  let open List in
+  let open ListUtil in
+  match (inf, s) with
+  | Premise s, s' when s = s' -> true
+  | Axiom a, ([ a' ], [ a'' ]) when a = a' && a = a'' -> true
+  | Weakening (Left, (gamma, delta)), (_ :: gamma', delta')
+    when gamma = gamma' && delta = delta' ->
+      true
+  | Weakening (Right, (gamma, delta)), (gamma', delta')
+    when gamma = gamma' && delta = revtl delta' ->
+      true
+  | Contraction (Left, (d :: d' :: gamma, delta)), (d'' :: gamma', delta')
+    when d = d' && d = d'' && gamma = gamma' && delta = delta' ->
+      true
+  | Contraction (Right, (gamma, delta)), (gamma', delta')
+    when gamma = gamma' && rev delta = hd (rev delta) :: rev delta' ->
+      true
+  | Exchange (Left, (gamma, delta), i), (gamma', delta')
+    when exch i gamma = gamma' && delta = delta' ->
+      true
+  | Exchange (Right, (gamma, delta), i), (gamma', delta')
+    when gamma = gamma' && exch i delta = delta' ->
+      true
+  | Cut ((gamma, delta), (pi, lambda)), (gamma', delta')
+    when revhd delta = hd pi
+         && gamma @ tl pi = gamma'
+         && revtl delta @ lambda = delta' ->
+      true
+  | Mix ((gamma, delta), (pi, lambda), a), (gamma', delta')
+    when gamma @ filter (fun a' -> not (a' = a)) pi = gamma'
+         && filter (fun a' -> not (a' = a)) delta @ lambda = delta' ->
+      true
+  | NegIntro (Left, (gamma, delta)), (gamma', delta')
+    when Neg (revhd delta) :: gamma = gamma' && revtl delta = delta' ->
+      true
+  | NegIntro (Right, (gamma, delta)), (gamma', delta')
+    when tl gamma = gamma' && delta @ [ Neg (hd gamma) ] = delta' ->
+      true
+  | ConjLeft (Left, (c :: gamma, delta)), (Conj (_, c') :: gamma', delta')
+    when c = c' && gamma = gamma' && delta = delta' ->
+      true
+  | ConjLeft (Right, (c :: gamma, delta)), (Conj (c', _) :: gamma', delta')
+    when c = c' && gamma = gamma' && delta = delta' ->
+      true
+  | ConjRight ((gamma, delta), (pi, lambda)), (gamma', delta')
+    when gamma = pi
+         && revtl delta = revtl lambda
+         && gamma = gamma'
+         && revtl delta @ [ Conj (revhd delta, revhd lambda) ] = delta' ->
+      true
+  | DisjLeft ((c :: gamma, delta), (d :: pi, lambda)), (gamma', delta')
+    when gamma = pi && delta = lambda
+         && Disj (c, d) :: gamma = gamma'
+         && delta = delta' ->
+      true
+  | DisjRight (Left, (gamma, delta)), (gamma', delta') when gamma = gamma' -> (
+      match (rev delta, rev delta') with
+      | c :: s, Disj (_, c') :: s' when c = c' && s = s' -> true
+      | _ -> false)
+  | DisjRight (Right, (gamma, delta)), (gamma', delta') when gamma = gamma' -> (
+      match (rev delta, rev delta') with
+      | c :: s, Disj (c', _) :: s' when c = c' && s = s' -> true
+      | _ -> false)
+  | ImplLeft ((gamma, delta), (d :: pi, lambda)), (gamma', delta')
+    when (Impl (revhd delta, d) :: gamma) @ pi = gamma'
+         && revtl delta @ lambda = delta' ->
+      true
+  | ImplRight (c :: gamma, delta), (gamma', delta')
+    when gamma = gamma' && revtl delta @ [ Impl (c, revhd delta) ] = delta' ->
+      true
+  | ForAllLeft ((f :: gamma, delta), t, (Bound _ as x)), (gamma', delta')
+    when ForAll (x, substitute_term f t (Var x)) :: gamma = gamma'
+         && delta = delta' ->
+      true
+  | ForAllRight ((gamma, delta), (Free _ as a), (Bound _ as x)), (gamma', delta')
+    when gamma = gamma'
+         && revtl delta
+            @ [ ForAll (x, substitute_term (revhd delta) (Var a) (Var x)) ]
+            = delta'
+         && List.for_all (fun f -> not (is_subterm_of_formula (Var a) f)) gamma
+         && List.for_all
+              (fun f -> not (is_subterm_of_formula (Var a) f))
+              (revtl delta) ->
+      true
+  | ( ExistsLeft ((f :: gamma, delta), (Free _ as a), (Bound _ as x)),
+      (gamma', delta') )
+    when Exists (x, substitute_term f (Var x) (Var x)) :: gamma = gamma'
+         && delta = delta'
+         && List.for_all (fun f -> not (is_subterm_of_formula (Var a) f)) gamma
+         && List.for_all (fun f -> not (is_subterm_of_formula (Var a) f)) delta
+    ->
+      true
+  | ExistsRight ((gamma, delta), t, (Bound _ as x)), (gamma', delta')
+    when gamma = gamma'
+         && revtl delta
+            @ [ Exists (x, substitute_term (revhd delta) t (Var x)) ]
+            = delta' ->
+      true
+  | Macro _, _ -> true
+  | _ -> false

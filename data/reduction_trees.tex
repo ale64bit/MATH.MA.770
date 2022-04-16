@@ -1,0 +1,36 @@
+\hrule
+
+\begin{tikzpicture}
+[grow via three points={one child at (0,1) and two children at (-5,1) and (5,1)}]
+\node {$ \rightarrow (A \land \neg A)$} child {node {$ \rightarrow {\color{red}(A \land \neg A)}, A$} child {node {$ \rightarrow {\color{red}(A \land \neg A)}, A$} child {node {$\dots$} }}} child {node {$ \rightarrow {\color{red}(A \land \neg A)}, \neg A$} child {node {$A \rightarrow {\color{red}(A \land \neg A)}, {\color{red}\neg A}$} child {node {$\dots$} }}};
+\end{tikzpicture}
+
+\hrule
+
+\begin{tikzpicture}
+[grow via three points={one child at (0,1) and two children at (-5,1) and (5,1)}]
+\node {$(A \supset B) \rightarrow (\neg B \supset \neg A)$} child {node {${\color{red}(A \supset B)} \rightarrow (\neg B \supset \neg A), A$} child {node {$\neg B, {\color{red}(A \supset B)} \rightarrow {\color{red}(\neg B \supset \neg A)}, A, \neg A$} child {node {${\color{red}\neg B}, {\color{red}(A \supset B)} \rightarrow {\color{red}(\neg B \supset \neg A)}, A, \neg A, B$} child {node {$A, {\color{red}\neg B}, {\color{red}(A \supset B)} \rightarrow {\color{red}(\neg B \supset \neg A)}, A, {\color{red}\neg A}, B$} }}}} child {node {$B, {\color{red}(A \supset B)} \rightarrow (\neg B \supset \neg A)$} child {node {$\neg B, B, {\color{red}(A \supset B)} \rightarrow {\color{red}(\neg B \supset \neg A)}, \neg A$} child {node {${\color{red}\neg B}, B, {\color{red}(A \supset B)} \rightarrow {\color{red}(\neg B \supset \neg A)}, \neg A, B$} }}};
+\end{tikzpicture}
+
+\hrule
+
+\begin{tikzpicture}
+[grow via three points={one child at (0,1) and two children at (-3.5,1) and (3.5,1)}]
+\node {$(A \supset B), (B \supset C) \rightarrow (A \supset C)$} child {node {${\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow (A \supset C), A, B$} child {node {$A, {\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow {\color{red}(A \supset C)}, A, B, C$} }} child {node {$C, {\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow (A \supset C), A$} child {node {$A, C, {\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow {\color{red}(A \supset C)}, A, C$} }} child {node {$B, {\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow (A \supset C), B$} } child {node {$B, C, {\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow (A \supset C)$} child {node {$A, B, C, {\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow {\color{red}(A \supset C)}, C$} }};
+\end{tikzpicture}
+
+\hrule
+
+\begin{tikzpicture}
+[grow via three points={one child at (0,1) and two children at (-3.5,1) and (3.5,1)}]
+\node {$(A \supset B), (B \supset C) \rightarrow (A \supset C)$} child {node {${\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow (A \supset C), A$} child {node {$A, {\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow {\color{red}(A \supset C)}, A, C$} }} child {node {${\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow (A \supset C), B$} child {node {$A, {\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow {\color{red}(A \supset C)}, B, C$} child {node {$A, {\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow {\color{red}(A \supset C)}, B, C$} child {node {$\dots$} }}}} child {node {$B, {\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow (A \supset C)$} child {node {$A, B, {\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow {\color{red}(A \supset C)}, C$} child {node {$A, B, {\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow {\color{red}(A \supset C)}, C$} child {node {$\dots$} }}}} child {node {$C, {\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow (A \supset C)$} child {node {$A, C, {\color{red}(A \supset B)}, {\color{red}(B \supset C)} \rightarrow {\color{red}(A \supset C)}, C$} }};
+\end{tikzpicture}
+
+\hrule
+
+\begin{tikzpicture}
+[grow via three points={one child at (0,1) and two children at (-5,1) and (5,1)}]
+\node {$(A \supset B) \rightarrow (\neg A \lor B)$} child {node {$(A \supset B) \rightarrow {\color{red}(\neg A \lor B)}, \neg A, B$} child {node {$A, (A \supset B) \rightarrow {\color{red}(\neg A \lor B)}, {\color{red}\neg A}, B$} child {node {$A, {\color{red}(A \supset B)} \rightarrow {\color{red}(\neg A \lor B)}, {\color{red}\neg A}, B, A$} } child {node {$B, A, {\color{red}(A \supset B)} \rightarrow {\color{red}(\neg A \lor B)}, {\color{red}\neg A}, B$} }}};
+\end{tikzpicture}
+
+\hrule

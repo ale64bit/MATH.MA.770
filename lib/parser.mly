@@ -34,6 +34,8 @@
 %token LOAD SAVE
 %token CLEAR
 %token MODE LK LJ
+%token CUTELIM
+%token RTREE
 
 (* Precedence *)
 %right IMPL 
@@ -125,3 +127,5 @@ let cmd :=
   | CLEAR; { Cmd.Clear }
   | MODE; LK; { Cmd.Mode Cmd.Classic }
   | MODE; LJ; { Cmd.Mode Cmd.Intuitionistic }
+  | CUTELIM; { Cmd.CutElim }
+  | RTREE; ~ = sequent; <Cmd.ReductionTree>

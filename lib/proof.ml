@@ -18,6 +18,7 @@ let empty = SequentMap.empty
 
 (* Add a sequent to the proof along with its inference *)
 let add s inf cmd proof =
+  assert (LK.valid_inference inf s);
   if SequentMap.mem s proof then ((SequentMap.find s proof).ent_index, proof)
   else
     let index = SequentMap.cardinal proof + 1 in
@@ -35,12 +36,12 @@ let resolve index proof =
   | Some (s, _) -> Ok s
   | None -> Error (Printf.sprintf "no sequent with index %d" index)
 
-let axioms_and_endsequent proof =
-  let entries =
-    List.sort
-      (fun (_, ei) (_, ej) -> Stdlib.compare ei.ent_index ej.ent_index)
-      (List.of_seq (SequentMap.to_seq proof))
-  in
+let proof_entries proof =
+  List.sort
+    (fun (_, ei) (_, ej) -> Stdlib.compare ei.ent_index ej.ent_index)
+    (SequentMap.bindings proof)
+
+let proof_axioms proof =
   let axioms =
     List.filter_map
       (fun (s, { ent_derivation; _ }) ->
@@ -48,17 +49,257 @@ let axioms_and_endsequent proof =
         | Axiom _ -> Some [ s ]
         | Macro (_, _, axioms) -> Some axioms
         | _ -> None)
-      entries
+      (proof_entries proof)
   in
+  List.sort_uniq Stdlib.compare (List.concat axioms)
+
+let endsequent proof =
+  let entries = proof_entries proof in
   let endseq, _ = List.hd (List.rev entries) in
-  (List.sort_uniq Stdlib.compare (List.concat axioms), endseq)
+  endseq
+
+let axioms_and_endsequent proof = (proof_axioms proof, endsequent proof)
+
+let expand_antecedent s s' proof =
+  let open LK in
+  let module S = FormulaSet in
+  let cs = S.of_list (antecedent s) in
+  let cs' = S.of_list (antecedent s') in
+  assert (S.subset cs cs');
+  let missing = S.diff cs' cs in
+  let proof, c =
+    S.fold
+      (fun a (p, c) ->
+        let _, p =
+          add (a :: c, succedent s) (Weakening (Left, (c, succedent s))) Nop p
+        in
+        (p, a :: c))
+      missing
+      (proof, antecedent s)
+  in
+  (proof, (c, succedent s))
+
+let expand_succedent s s' proof =
+  let open LK in
+  let module S = FormulaSet in
+  let cs = S.of_list (succedent s) in
+  let cs' = S.of_list (succedent s') in
+  assert (S.subset cs cs');
+  let missing = S.diff cs' cs in
+  let proof, c =
+    S.fold
+      (fun a (p, c) ->
+        let _, p =
+          add
+            (antecedent s, c @ [ a ])
+            (Weakening (Right, (antecedent s, c)))
+            Nop p
+        in
+        (p, c @ [ a ]))
+      missing
+      (proof, succedent s)
+  in
+  (proof, (antecedent s, c))
+
+let sort_antecedent s s' proof =
+  let open LK in
+  let module S = FormulaSet in
+  assert (List.length (antecedent s) = List.length (antecedent s'));
+  assert (S.equal (S.of_list (antecedent s)) (S.of_list (antecedent s')));
+  let rec aux i acc t t' p =
+    match (t, t') with
+    | [], [] -> p
+    | a :: xs, a' :: ys when a = a' -> aux (i + 1) (a :: acc) xs ys p
+    | _ :: xs, a' :: _ ->
+        let j, _ =
+          List.find (fun (_, b) -> a' = b) (List.mapi (fun i a -> (i, a)) xs)
+        in
+        let _, p =
+          add
+            (List.rev acc @ ListUtil.exch j t, succedent s)
+            (Exchange (Left, (List.rev acc @ t, succedent s), i + j))
+            Nop p
+        in
+        aux i acc (ListUtil.exch j t) t' p
+    | _ -> failwith "cannot happen"
+  in
+  (aux 0 [] (antecedent s) (antecedent s') proof, (antecedent s', succedent s))
+
+let sort_succedent s s' proof =
+  let open LK in
+  let module S = FormulaSet in
+  assert (List.length (succedent s) = List.length (succedent s'));
+  assert (S.equal (S.of_list (succedent s)) (S.of_list (succedent s')));
+  let rec aux i acc t t' p =
+    match (t, t') with
+    | [], [] -> p
+    | a :: xs, a' :: ys when a = a' -> aux (i + 1) (a :: acc) xs ys p
+    | _ :: xs, a' :: _ ->
+        let j, _ =
+          List.find (fun (_, b) -> a' = b) (List.mapi (fun i a -> (i, a)) xs)
+        in
+        let _, p =
+          add
+            (antecedent s, List.rev acc @ ListUtil.exch j t)
+            (Exchange (Right, (antecedent s, List.rev acc @ t), i + j))
+            Nop p
+        in
+        aux i acc (ListUtil.exch j t) t' p
+    | _ -> failwith "cannot happen"
+  in
+  (aux 0 [] (succedent s) (succedent s') proof, (antecedent s, succedent s'))
+
+let expand_and_sort_sequent s s' proof =
+  let open LK in
+  let module S = FormulaSet in
+  assert (List.length (antecedent s) <= List.length (antecedent s'));
+  assert (List.length (succedent s) <= List.length (succedent s'));
+  assert (S.subset (S.of_list (antecedent s)) (S.of_list (antecedent s')));
+  assert (S.subset (S.of_list (succedent s)) (S.of_list (succedent s')));
+  let proof, s = expand_antecedent s s' proof in
+  let proof, s = expand_succedent s s' proof in
+  let proof, s = sort_antecedent s s' proof in
+  let proof, s = sort_succedent s s' proof in
+  assert (s = s');
+  proof
+
+(*
+          Γ → Δ
+    -----------------
+    A, ... , A, Γ* → Δ
+    -----------------
+       A, Γ* → Δ
+*)
+(*
+TODO
+let drain_antecedent_left s a proof =
+  let open LK in
+  let sl, sr = List.partition (fun a' -> a' = a) (antecedent s) in
+  let s' = (sl @ sr, succedent s) in
+  let proof, _ = sort_antecedent s s' proof in
+  let rec aux s proof =
+    match s with
+    | a' :: a'' :: gamma, delta when a = a' && a = a'' ->
+        let s' = (a :: gamma, delta) in
+        let _, p = add s' (Contraction (Left, s)) Nop proof in
+        aux s' p
+    | _ ->
+        assert (s = (a :: sr, succedent s'));
+        proof
+  in
+  aux s' proof
+  *)
+
+(*
+  TODO:
+    drain_antecedent_right s a proof
+    drain_succedent_left s a proof
+    drain_succedent_right s a proof
+    regularize proof
+    subproof s proof
+    copy_with_replacement a t proof
+    expand macros
+*)
+
+let convert_cut_to_mix proof =
+  let open LK in
+  let rec aux s p =
+    match (SequentMap.find s proof).ent_derivation with
+    | Premise _ as inf ->
+        let _, p = add s inf Nop p in
+        p
+    | Axiom _ as inf ->
+        let _, p = add s inf Nop p in
+        p
+    | Weakening (_, s1) as inf ->
+        let p = aux s1 p in
+        let _, p = add s inf Nop p in
+        p
+    | Contraction (_, s1) as inf ->
+        let p = aux s1 p in
+        let _, p = add s inf Nop p in
+        p
+    | Exchange (_, s1, _) as inf ->
+        let p = aux s1 p in
+        let _, p = add s inf Nop p in
+        p
+    | Cut (s1, s2) ->
+        let d = List.hd (antecedent s2) in
+        let p = p |> aux s1 |> aux s2 in
+        let s' =
+          let not_d a = not (a = d) in
+          ( antecedent s1 @ List.filter not_d (antecedent s2),
+            List.filter not_d (succedent s1) @ succedent s2 )
+        in
+        let _, p = add s' (Mix (s1, s2, d)) Nop p in
+        expand_and_sort_sequent s' s p
+    | Mix (s1, s2, _) as inf ->
+        let p = aux s1 p in
+        let p = aux s2 p in
+        let _, p = add s inf Nop p in
+        p
+    | NegIntro (_, s1) as inf ->
+        let p = aux s1 p in
+        let _, p = add s inf Nop p in
+        p
+    | ConjLeft (_, s1) as inf ->
+        let p = aux s1 p in
+        let _, p = add s inf Nop p in
+        p
+    | ConjRight (s1, s2) as inf ->
+        let p = aux s1 p in
+        let p = aux s2 p in
+        let _, p = add s inf Nop p in
+        p
+    | DisjLeft (s1, s2) as inf ->
+        let p = aux s1 p in
+        let p = aux s2 p in
+        let _, p = add s inf Nop p in
+        p
+    | DisjRight (_, s1) as inf ->
+        let p = aux s1 p in
+        let _, p = add s inf Nop p in
+        p
+    | ImplLeft (s1, s2) as inf ->
+        let p = aux s1 p in
+        let p = aux s2 p in
+        let _, p = add s inf Nop p in
+        p
+    | ImplRight s1 as inf ->
+        let p = aux s1 p in
+        let _, p = add s inf Nop p in
+        p
+    | ForAllLeft (s1, _, _) as inf ->
+        let p = aux s1 p in
+        let _, p = add s inf Nop p in
+        p
+    | ForAllRight (s1, _, _) as inf ->
+        let p = aux s1 p in
+        let _, p = add s inf Nop p in
+        p
+    | ExistsLeft (s1, _, _) as inf ->
+        let p = aux s1 p in
+        let _, p = add s inf Nop p in
+        p
+    | ExistsRight (s1, _, _) as inf ->
+        let p = aux s1 p in
+        let _, p = add s inf Nop p in
+        p
+    | Macro _ -> p
+  in
+  aux (endsequent proof) empty
+
+let cut_elimination proof =
+  let proof = convert_cut_to_mix proof in
+  (* TODO continue *)
+  proof
 
 let string_of_derivation proof =
   let open LK in
   let open SequentMap in
   function
-  | Axiom _ -> "[Axiom]"
   | Premise _ -> "[Premise]"
+  | Axiom _ -> "[Axiom]"
   | Weakening (side, s) ->
       Printf.sprintf "[W%s (%d)]" (string_of_side side) (find s proof).ent_index
   | Contraction (side, s) ->
@@ -68,6 +309,9 @@ let string_of_derivation proof =
   | Cut (s, t) ->
       Printf.sprintf "[Cut (%d) (%d)]" (find s proof).ent_index
         (find t proof).ent_index
+  | Mix (s, t, a) ->
+      Printf.sprintf "[Mix (%d) (%d) (%s)]" (find s proof).ent_index
+        (find t proof).ent_index (LK.string_of_formula a)
   | NegIntro (side, s) ->
       Printf.sprintf "[¬%s (%d)]" (string_of_side side) (find s proof).ent_index
   | ConjLeft (_, s) -> Printf.sprintf "[∧L (%d)]" (find s proof).ent_index
@@ -97,11 +341,7 @@ let string_of_derivation proof =
   | Macro (name, _, _) -> Printf.sprintf "[macro %s]" name
 
 let print_proof proof =
-  let entries =
-    List.sort
-      (fun (_, ei) (_, ej) -> Stdlib.compare ei.ent_index ej.ent_index)
-      (List.of_seq (SequentMap.to_seq proof))
-  in
+  let entries = proof_entries proof in
   List.iteri
     (fun i (s, { ent_derivation; _ }) ->
       Printf.printf "  (%d) %-60s%s\n" (i + 1) (LK.string_of_sequent s)
@@ -112,8 +352,8 @@ let tex_of_proof proof =
   let open LK in
   let rec aux s =
     match (SequentMap.find s proof).ent_derivation with
-    | Axiom f -> Printf.sprintf "\\AxiomC{$%s$}" (tex_of_sequent ([ f ], [ f ]))
     | Premise s -> Printf.sprintf "\\AxiomC{[$%s$]}" (tex_of_sequent s)
+    | Axiom f -> Printf.sprintf "\\AxiomC{$%s$}" (tex_of_sequent ([ f ], [ f ]))
     | Weakening (side, s') ->
         Printf.sprintf "%s\n\\RightLabel{[W%s]}\n\\UnaryInfC{$%s$}" (aux s')
           (string_of_side side) (tex_of_sequent s)
@@ -126,6 +366,9 @@ let tex_of_proof proof =
     | Cut (sl, sr) ->
         Printf.sprintf "%s\n%s\n\\RightLabel{[Cut]}\n\\BinaryInfC{$%s$}"
           (aux sl) (aux sr) (tex_of_sequent s)
+    | Mix (sl, sr, a) ->
+        Printf.sprintf "%s\n%s\n\\RightLabel{[Mix(%s)]}\n\\BinaryInfC{$%s$}"
+          (aux sl) (aux sr) (tex_of_formula a) (tex_of_sequent s)
     | NegIntro (side, s') ->
         Printf.sprintf "%s\n\\RightLabel{[$\\neg$%s]}\n\\UnaryInfC{$%s$}"
           (aux s') (string_of_side side) (tex_of_sequent s)
@@ -180,20 +423,10 @@ let tex_of_proof proof =
           (List.assoc (List.length axioms) nth_inf)
           (tex_of_sequent s)
   in
-  let entries =
-    List.sort
-      (fun (_, ei) (_, ej) -> Stdlib.compare ej.ent_index ei.ent_index)
-      (List.of_seq (SequentMap.to_seq proof))
-  in
-  let s, _ = List.hd entries in
-  aux s
+  aux (endsequent proof)
 
 let string_of_proof_cmds proof =
-  let entries =
-    List.sort
-      (fun (_, ei) (_, ej) -> Stdlib.compare ei.ent_index ej.ent_index)
-      (List.of_seq (SequentMap.to_seq proof))
-  in
+  let entries = proof_entries proof in
   String.concat "\n"
     (List.map
        (fun (_, { ent_command; _ }) -> Cmd.ascii_string_of_cmd ent_command)

@@ -25,6 +25,9 @@ type cmd =
   | TeX of string
   | Clear
   | Mode of mode
+  | Nop
+  | CutElim
+  | ReductionTree of LK.sequent
 
 let string_of_mode = function Classic -> "LK" | Intuitionistic -> "LJ"
 

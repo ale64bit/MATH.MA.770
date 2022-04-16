@@ -4,7 +4,7 @@ let letter = [%sedlex.regexp? 'a' .. 'z' | 'A' .. 'Z']
 let id = [%sedlex.regexp? letter, Plus (letter | number | '_' | '.')]
 let str = [%sedlex.regexp? '"', Star any, '"']
 let suffix = [%sedlex.regexp? Opt number, Star ('\'' | '*')]
-let formula = [%sedlex.regexp? Chars "ABCFG", suffix]
+let formula = [%sedlex.regexp? Chars "ABCDFG", suffix]
 let term = [%sedlex.regexp? Chars "ts", suffix]
 let constant = [%sedlex.regexp? 'k', suffix]
 let relation = [%sedlex.regexp? 'R', suffix]
@@ -80,4 +80,6 @@ let rec token buf =
   | "mode" -> MODE
   | "LK" -> LK
   | "LJ" -> LJ
+  | "cutelim" -> CUTELIM
+  | "rtree" -> RTREE
   | _ -> raise (Error "unexpected character")
