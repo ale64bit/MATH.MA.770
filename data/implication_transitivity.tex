@@ -1,0 +1,46 @@
+\begin{prooftree}
+\AxiomC{$A \rightarrow A$}
+\AxiomC{$B \rightarrow B$}
+\doubleLine
+\RightLabel{[detachment]}
+\BinaryInfC{$A, (A \supset B) \rightarrow B$}
+\RightLabel{[WR]}
+\UnaryInfC{$A, (A \supset B) \rightarrow B, C$}
+\RightLabel{[XR]}
+\UnaryInfC{$A, (A \supset B) \rightarrow C, B$}
+\AxiomC{$C \rightarrow C$}
+\RightLabel{[WL]}
+\UnaryInfC{$(A \supset B), C \rightarrow C$}
+\RightLabel{[XL]}
+\UnaryInfC{$C, (A \supset B) \rightarrow C$}
+\RightLabel{[WL]}
+\UnaryInfC{$A, C, (A \supset B) \rightarrow C$}
+\RightLabel{[XL]}
+\UnaryInfC{$C, A, (A \supset B) \rightarrow C$}
+\RightLabel{[$\supset$L]}
+\BinaryInfC{$(B \supset C), A, (A \supset B), A, (A \supset B) \rightarrow C, C$}
+\RightLabel{[CR]}
+\UnaryInfC{$(B \supset C), A, (A \supset B), A, (A \supset B) \rightarrow C$}
+\RightLabel{[XL]}
+\UnaryInfC{$A, (B \supset C), (A \supset B), A, (A \supset B) \rightarrow C$}
+\RightLabel{[XL]}
+\UnaryInfC{$A, (B \supset C), A, (A \supset B), (A \supset B) \rightarrow C$}
+\RightLabel{[XL]}
+\UnaryInfC{$A, A, (B \supset C), (A \supset B), (A \supset B) \rightarrow C$}
+\RightLabel{[CL]}
+\UnaryInfC{$A, (B \supset C), (A \supset B), (A \supset B) \rightarrow C$}
+\RightLabel{[XL]}
+\UnaryInfC{$A, (A \supset B), (B \supset C), (A \supset B) \rightarrow C$}
+\RightLabel{[XL]}
+\UnaryInfC{$(A \supset B), A, (B \supset C), (A \supset B) \rightarrow C$}
+\RightLabel{[XL]}
+\UnaryInfC{$(A \supset B), A, (A \supset B), (B \supset C) \rightarrow C$}
+\RightLabel{[XL]}
+\UnaryInfC{$(A \supset B), (A \supset B), A, (B \supset C) \rightarrow C$}
+\RightLabel{[CL]}
+\UnaryInfC{$(A \supset B), A, (B \supset C) \rightarrow C$}
+\RightLabel{[XL]}
+\UnaryInfC{$A, (A \supset B), (B \supset C) \rightarrow C$}
+\RightLabel{[$\supset$R]}
+\UnaryInfC{$(A \supset B), (B \supset C) \rightarrow (A \supset C)$}
+\end{prooftree}

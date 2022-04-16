@@ -1,0 +1,21 @@
+macro "data/detachment.proof" 
+rweak 1 C
+rexch 2 0
+axiom C
+lweak 4 (A => B)
+lexch 5 0
+lweak 6 A
+lexch 7 0
+limpl 3 8
+rcont 9
+lexch 10 0
+lexch 11 2
+lexch 12 1
+lcont 13
+lexch 14 1
+lexch 15 0
+lexch 16 2
+lexch 17 1
+lcont 18
+lexch 19 0
+rimpl 20
