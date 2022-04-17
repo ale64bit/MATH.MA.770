@@ -1,5 +1,7 @@
 \hrule
 
+% rtree -> A&~A
+
 \begin{tikzpicture}
 [grow via three points={one child at (0,1) and two children at (-5,1) and (5,1)}]
 \node {$ \rightarrow (A \land \neg A)$} child {node {$ \rightarrow {\color{red}(A \land \neg A)}, A$} child {node {$ \rightarrow {\color{red}(A \land \neg A)}, A$} child {node {$\dots$} }}} child {node {$ \rightarrow {\color{red}(A \land \neg A)}, \neg A$} child {node {$A \rightarrow {\color{red}(A \land \neg A)}, {\color{red}\neg A}$} child {node {$\dots$} }}};
@@ -7,12 +9,25 @@
 
 \hrule
 
+% rtree A&~A ->
+
+\begin{tikzpicture}
+[grow via three points={one child at (0,1) and two children at (-5,1) and (5,1)}]
+\node {$(A \land \neg A) \rightarrow $} child {node {$A, \neg A, {\color{red}(A \land \neg A)} \rightarrow $} child {node {$A, {\color{red}\neg A}, {\color{red}(A \land \neg A)} \rightarrow A$} }};
+\end{tikzpicture}
+
+\hrule
+
+% rtree A=>B -> ~B=>~A
+
 \begin{tikzpicture}
 [grow via three points={one child at (0,1) and two children at (-5,1) and (5,1)}]
 \node {$(A \supset B) \rightarrow (\neg B \supset \neg A)$} child {node {${\color{red}(A \supset B)} \rightarrow (\neg B \supset \neg A), A$} child {node {$\neg B, {\color{red}(A \supset B)} \rightarrow {\color{red}(\neg B \supset \neg A)}, A, \neg A$} child {node {${\color{red}\neg B}, {\color{red}(A \supset B)} \rightarrow {\color{red}(\neg B \supset \neg A)}, A, \neg A, B$} child {node {$A, {\color{red}\neg B}, {\color{red}(A \supset B)} \rightarrow {\color{red}(\neg B \supset \neg A)}, A, {\color{red}\neg A}, B$} }}}} child {node {$B, {\color{red}(A \supset B)} \rightarrow (\neg B \supset \neg A)$} child {node {$\neg B, B, {\color{red}(A \supset B)} \rightarrow {\color{red}(\neg B \supset \neg A)}, \neg A$} child {node {${\color{red}\neg B}, B, {\color{red}(A \supset B)} \rightarrow {\color{red}(\neg B \supset \neg A)}, \neg A, B$} }}};
 \end{tikzpicture}
 
 \hrule
+
+% rtree A=>B, B=>C -> A=>C
 
 \begin{tikzpicture}
 [grow via three points={one child at (0,1) and two children at (-3.5,1) and (3.5,1)}]
@@ -28,9 +43,33 @@
 
 \hrule
 
+% rtree A=>B -> ~A|B
+
 \begin{tikzpicture}
 [grow via three points={one child at (0,1) and two children at (-5,1) and (5,1)}]
-\node {$(A \supset B) \rightarrow (\neg A \lor B)$} child {node {$(A \supset B) \rightarrow {\color{red}(\neg A \lor B)}, \neg A, B$} child {node {$A, (A \supset B) \rightarrow {\color{red}(\neg A \lor B)}, {\color{red}\neg A}, B$} child {node {$A, {\color{red}(A \supset B)} \rightarrow {\color{red}(\neg A \lor B)}, {\color{red}\neg A}, B, A$} } child {node {$B, A, {\color{red}(A \supset B)} \rightarrow {\color{red}(\neg A \lor B)}, {\color{red}\neg A}, B$} }}};
+\node {$(A \supset B) \rightarrow (\neg A \lor B)$} child {node {$(A \supset B) \rightarrow {\color{red}(\neg A \lor B)}, \neg A, B$} child {node {${\color{red}(A \supset B)} \rightarrow {\color{red}(\neg A \lor B)}, \neg A, B, A$} child {node {$A, {\color{red}(A \supset B)} \rightarrow {\color{red}(\neg A \lor B)}, {\color{red}\neg A}, B, A$} }} child {node {$B, {\color{red}(A \supset B)} \rightarrow {\color{red}(\neg A \lor B)}, \neg A, B$} }};
+\end{tikzpicture}
+
+\hrule
+
+% rtree ~:ExF(x) -> :Ay~F(y)
+
+{\bf 8.3.1)}
+
+\begin{tikzpicture}
+[grow via three points={one child at (0,1) and two children at (-5,1) and (5,1)}]
+\node {$\neg \exists x F(x) \rightarrow \forall y \neg F(y)$} child {node {${\color{red}\neg \exists x F(x)} \rightarrow \forall y \neg F(y), \exists x F(x)$} child {node {${\color{red}\neg \exists x F(x)} \rightarrow {\color{red}\forall y \neg F(y)}, \exists x F(x), \neg F(a)$} child {node {${\color{red}\neg \exists x F(x)} \rightarrow {\color{red}\forall y \neg F(y)}, \exists x F(x), \neg F(a), F(a)$} child {node {$F(a), {\color{red}\neg \exists x F(x)} \rightarrow {\color{red}\forall y \neg F(y)}, \exists x F(x), {\color{red}\neg F(a)}, F(a)$} }}}};
+\end{tikzpicture}
+
+\hrule
+
+% rtree :Ex(A(x)=>B(x)) -> :AxA(x)=>:ExB(x)
+
+{\bf 8.3.2)}
+
+\begin{tikzpicture}
+[grow via three points={one child at (0,1) and two children at (-7.1,1) and (7.1,1)}]
+\node {$\exists x (A(x) \supset B(x)) \rightarrow (\forall x A(x) \supset \exists x B(x))$} child {node {$\forall x A(x), \exists x (A(x) \supset B(x)) \rightarrow {\color{red}(\forall x A(x) \supset \exists x B(x))}, \exists x B(x)$} child {node {$A(a), \forall x A(x), \exists x (A(x) \supset B(x)) \rightarrow {\color{red}(\forall x A(x) \supset \exists x B(x))}, \exists x B(x)$} child {node {$(A(b) \supset B(b)), A(a), \forall x A(x), {\color{red}\exists x (A(x) \supset B(x))} \rightarrow {\color{red}(\forall x A(x) \supset \exists x B(x))}, \exists x B(x)$} child {node {$(A(b) \supset B(b)), A(a), \forall x A(x), {\color{red}\exists x (A(x) \supset B(x))} \rightarrow {\color{red}(\forall x A(x) \supset \exists x B(x))}, \exists x B(x), B(b)$} child {node {${\color{red}(A(b) \supset B(b))}, A(a), \forall x A(x), {\color{red}\exists x (A(x) \supset B(x))} \rightarrow {\color{red}(\forall x A(x) \supset \exists x B(x))}, \exists x B(x), B(b), A(b)$} child {node {$A(b), {\color{red}(A(b) \supset B(b))}, A(a), \forall x A(x), {\color{red}\exists x (A(x) \supset B(x))} \rightarrow {\color{red}(\forall x A(x) \supset \exists x B(x))}, \exists x B(x), B(b), A(b)$} }} child {node {$B(b), {\color{red}(A(b) \supset B(b))}, A(a), \forall x A(x), {\color{red}\exists x (A(x) \supset B(x))} \rightarrow {\color{red}(\forall x A(x) \supset \exists x B(x))}, \exists x B(x), B(b)$} }}}}};
 \end{tikzpicture}
 
 \hrule
