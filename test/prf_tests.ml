@@ -35,20 +35,12 @@ let test_binary_fn f cases =
       match res with
       | Ok got ->
           let msg = Printf.sprintf "evaluating %s(%d,%d)" f a b in
-          assert_equal ~printer:string_of_int ~msg (Nat.int_of_nat got) want
+          assert_equal ~printer:string_of_int ~msg want (Nat.int_of_nat got)
       | Error msg -> assert_failure (Printf.sprintf "%s(%d,%d): %s" f a b msg))
     cases
 
-let test_binary_pred f cases =
-  List.iter
-    (fun (a, b, want) ->
-      let res = PRF.eval env f [ Nat.nat_of_int a; Nat.nat_of_int b ] in
-      match res with
-      | Ok got ->
-          let msg = Printf.sprintf "evaluating %s(%d,%d)" f a b in
-          assert_equal ~printer:string_of_bool ~msg (got = Zero) want
-      | Error msg -> assert_failure (Printf.sprintf "%s(%d,%d): %s" f a b msg))
-    cases
+let min a b = if a < b then a else b
+let max a b = if a > b then a else b
 
 (* Verify that the defined PRFs do represent the intended function/predicate *)
 
@@ -70,21 +62,29 @@ let exp_tests _ =
 
 let sub_tests _ =
   let n = 20 in
-  let max a b = if a > b then a else b in
   let cases =
     List.map (fun (a, b) -> (a, b, max 0 (a - b))) (gen_binary_args n)
   in
   test_binary_fn "SUB" cases
 
+let min_tests _ =
+  let n = 20 in
+  let cases = List.map (fun (a, b) -> (a, b, min a b)) (gen_binary_args n) in
+  test_binary_fn "MIN" cases
+
 let eq_tests _ =
   let n = 20 in
-  let cases = List.map (fun (a, b) -> (a, b, a = b)) (gen_binary_args n) in
-  test_binary_pred "EQ" cases
+  let cases =
+    List.map (fun (a, b) -> (a, b, if a = b then 0 else 1)) (gen_binary_args n)
+  in
+  test_binary_fn "EQ" cases
 
 let lt_tests _ =
   let n = 20 in
-  let cases = List.map (fun (a, b) -> (a, b, a < b)) (gen_binary_args n) in
-  test_binary_pred "LT" cases
+  let cases =
+    List.map (fun (a, b) -> (a, b, if a < b then 0 else 1)) (gen_binary_args n)
+  in
+  test_binary_fn "LT" cases
 
 let suite =
   "PRFTests"
@@ -93,6 +93,7 @@ let suite =
          "MULT" >:: mult_tests;
          "EXP" >:: exp_tests;
          "SUB" >:: sub_tests;
+         "MIN" >:: min_tests;
          "EQ" >:: eq_tests;
          "LT" >:: lt_tests;
        ]

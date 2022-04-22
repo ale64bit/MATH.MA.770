@@ -11,6 +11,8 @@ S(x) = x'
 % Type II: Constant functions
 C1_0(x) = 0
 C1_1(x) = 1
+C2_1(x,y) = 1
+C2_1(x,y) = 1
 
 % Type III: Identity functions
 U1_1(x) = x
@@ -43,11 +45,21 @@ xi4(b,c,a) = PRED(U3_2(b,c,a))
 psi4(0,a) = U1_1(a), psi4(b',a) = xi4(b, psi4(b,a), a)
 SUB(a,b) = psi4(U2_2(a,b), U2_1(a,b))
 
-% Equality [ex. 10.4]
+% ABSDIFF |a-b|
 xi5(a,b) = SUB(U2_2(a,b), U2_1(a,b))
-EQ(a,b) = ADD(SUB(a,b), xi5(a,b))
+ABSDIFF(a,b) = ADD(SUB(a,b), xi5(a,b))
+
+% Min
+xi6(a,b) = SUB(U2_2(a,b), U2_1(a,b))
+MIN(a,b) = SUB(U2_2(a,b), xi6(a,b))
+
+% Equality [ex. 10.4]
+xi7(a,b) = SUB(U2_2(a,b), U2_1(a,b))
+xi8(a,b) = ADD(SUB(a,b), xi7(a,b))
+EQ(a,b) = MIN(C2_1(a,b), xi8(a,b))
 
 % Less-Than [ex. 10.4]
-xi6(a,b) = S(U2_1(a,b))
-LT(a,b) = SUB(xi6(a,b), U2_2(a,b))
+xi9(a,b) = S(U2_1(a,b))
+xi10(a,b) = SUB(xi9(a,b), U2_2(a,b))
+LT(a,b) = MIN(C2_1(a,b), xi10(a,b))
 
