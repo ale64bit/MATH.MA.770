@@ -1,0 +1,3 @@
+(tests
+ (names prf_tests)
+ (libraries ounit2 prf))

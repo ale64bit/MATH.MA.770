@@ -1,0 +1,53 @@
+%===============================================================================
+% Primitive-Recursive Functions
+%
+% Notation follows Kleene's "Introduction to Metamathematics".
+% See test/prf_tests.ml for the parser/evaluator tests.
+%===============================================================================
+
+% Type I: Successor function
+S(x) = x'
+
+% Type II: Constant functions
+C1_0(x) = 0
+C1_1(x) = 1
+
+% Type III: Identity functions
+U1_1(x) = x
+U2_1(x,y) = x
+U2_2(x,y) = y
+U3_1(x,y,z) = x
+U3_2(x,y,z) = y
+U3_3(x,y,z) = z
+
+% Addition
+xi1(b,c,a) = S(U3_2(b,c,a))
+psi1(0,a) = U1_1(a), psi1(b',a) = xi1(b, psi1(b,a), a)
+ADD(a,b) = psi1(U2_2(a,b), U2_1(a,b))
+
+% Multiplication [ex. 10.2.1]
+xi2(b,c,a) = ADD(U3_2(b,c,a), U3_3(b,c,a))
+psi2(0,a) = C1_0(a), psi2(b',a) = xi2(b, psi2(b,a), a)
+MULT(a,b) = psi2(U2_2(a,b), U2_1(a,b))
+
+% Exponentiation
+xi3(b,c,a) = MULT(U3_2(b,c,a), U3_3(b,c,a))
+psi3(0,a) = C1_1(a), psi3(b',a) = xi3(b, psi3(b,a), a)
+EXP(a,b) = psi3(U2_2(a,b), U2_1(a,b))
+
+% Predecessor (clamped)
+PRED(0) = 0, PRED(a') = U2_1(a, PRED(a))
+
+% Subtraction (clamped)
+xi4(b,c,a) = PRED(U3_2(b,c,a))
+psi4(0,a) = U1_1(a), psi4(b',a) = xi4(b, psi4(b,a), a)
+SUB(a,b) = psi4(U2_2(a,b), U2_1(a,b))
+
+% Equality [ex. 10.4]
+xi5(a,b) = SUB(U2_2(a,b), U2_1(a,b))
+EQ(a,b) = ADD(SUB(a,b), xi5(a,b))
+
+% Less-Than [ex. 10.4]
+xi6(a,b) = S(U2_1(a,b))
+LT(a,b) = SUB(xi6(a,b), U2_2(a,b))
+

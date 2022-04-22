@@ -1,0 +1,13 @@
+\begin{prooftree}
+  \AxiomC{$\to 0''+0=0''$}
+  \AxiomC{$0''+0=0'' \to (0''+0)'=0'''$}
+  \RightLabel{[Cut]}
+  \BinaryInfC{$\to (0''+0)'=0'''$}
+
+  \AxiomC{$\to 0''+0'=(0''+0)'$}
+  \AxiomC{$0''+0'=(0''+0)', (0''+0)'=0''' \to 0''+0'=0'''$}
+  \RightLabel{[Cut]}
+  \BinaryInfC{$(0''+0)'=0''' \to 0''+0'=0'''$}
+  \RightLabel{[Cut]}
+  \BinaryInfC{$\to 0''+0'=0'''$}
+\end{prooftree}
